@@ -1,6 +1,6 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, redirect } from "react-router-dom";
 import React, { Suspense, lazy } from "react";
-import { getRouteConfig } from "@/router/route.utils";
+import { getRouteConfig, verifyRouteAccess } from "@/router/route.utils";
 import Layout from "@/components/organisms/Layout";
 import ErrorPage from "@/components/pages/ErrorPage";
 import Root from "@/layouts/Root";
@@ -14,6 +14,7 @@ const QuotesPage = lazy(() => import('@/components/pages/Quotes'))
 const SalesOrdersPage = lazy(() => import('@/components/pages/SalesOrders'))
 const TasksPage = lazy(() => import('@/components/pages/Tasks'))
 const ReportsPage = lazy(() => import('@/components/pages/Reports'))
+const CustomizePage = lazy(() => import('@/components/pages/Customize'))
 const NotFoundPage = lazy(() => import('@/components/pages/NotFound'))
 const LoginPage = lazy(() => import('@/components/pages/Login'))
 const SignupPage = lazy(() => import('@/components/pages/Signup'))
@@ -103,7 +104,21 @@ createRoute({
     path: "reports",
     element: <ReportsPage />,
     title: 'Reports'
-  })
+}),
+  {
+    path: '/customize',
+    element: <CustomizePage />,
+    loader: async () => {
+      const config = getRouteConfig('/customize')
+      const hasAccess = await verifyRouteAccess('/customize')
+      
+      if (!hasAccess) {
+        throw redirect(`/login?redirect=${encodeURIComponent('/customize')}`)
+      }
+      
+      return { config }
+    }
+  }
 ]
 const authRoutes = [
   createRoute({

@@ -1,3 +1,4 @@
+[
 {
   "/":{
   "/": {
@@ -168,6 +169,12 @@
       },
       "redirectOnDeny": "/login",
       "excludeRedirectQuery": false
+}}},
+    {
+      "path": "/customize",
+      "access": "authenticated",
+      "title": "Customize",
+      "description": "Customize tables and fields"
     }
-  }
-}
+  
+]
