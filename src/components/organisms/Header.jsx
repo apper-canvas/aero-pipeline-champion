@@ -105,3 +105,5 @@ const navigation = [
     </header>
   )
 }
+
+export default Header;
