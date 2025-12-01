@@ -4,6 +4,16 @@ import Badge from '@/components/atoms/Badge'
 import { formatDistanceToNow } from 'date-fns'
 
 const DealCard = ({ deal, contact, onEdit, onView }) => {
+  // Safe date formatting utility
+  const safeDateFormat = (dateValue, fallback = 'Unknown') => {
+    if (!dateValue) return fallback
+    try {
+      const date = new Date(dateValue)
+      return isNaN(date.getTime()) ? fallback : formatDistanceToNow(date, { addSuffix: true })
+    } catch {
+      return fallback
+    }
+  }
   const [isDragging, setIsDragging] = useState(false)
 
   const handleDragStart = (e) => {
@@ -96,9 +106,9 @@ const DealCard = ({ deal, contact, onEdit, onView }) => {
           </span>
         </div>
         <div className="flex items-center gap-1">
-          <ApperIcon name="Calendar" className="w-3 h-3" />
+<ApperIcon name="Calendar" className="w-3 h-3" />
           <span>
-            Last contact: {formatDistanceToNow(new Date(deal.lastContact), { addSuffix: true })}
+            Last contact: {safeDateFormat(deal.lastContact, 'recently')}
           </span>
         </div>
       </div>

@@ -170,9 +170,9 @@ const formatCurrency = (amount) => {
 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                     {(() => {
                       if (!contact.createdAt) return 'Unknown';
-                      const date = new Date(contact.createdAt);
-                      if (isNaN(date.getTime())) return 'Unknown';
                       try {
+                        const date = new Date(contact.createdAt);
+                        if (isNaN(date.getTime())) return 'Unknown';
                         return formatDistanceToNow(date, { addSuffix: true });
                       } catch (error) {
                         return 'Unknown';

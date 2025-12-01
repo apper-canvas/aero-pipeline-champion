@@ -1,13 +1,26 @@
-import { useState, useEffect } from 'react'
-import { noteService } from '@/services/api/noteService'
-import { contactService } from '@/services/api/contactService'
-import ApperIcon from '@/components/ApperIcon'
-import Button from '@/components/atoms/Button'
-import Badge from '@/components/atoms/Badge'
-import { formatDistanceToNow } from 'date-fns'
-import { toast } from 'react-toastify'
+import React, { useEffect, useState } from "react";
+import { noteService } from "@/services/api/noteService";
+import { contactService } from "@/services/api/contactService";
+import { formatDistanceToNow } from "date-fns";
+import { toast } from "react-toastify";
+import { create as createCompany, getById as getCompanyById } from "@/services/api/companyService";
+import { create as createQuote, getById as getQuoteById } from "@/services/api/quoteService";
+import ApperIcon from "@/components/ApperIcon";
+import Loading from "@/components/ui/Loading";
+import Button from "@/components/atoms/Button";
+import Badge from "@/components/atoms/Badge";
 
 const DealDetailModal = ({ isOpen, onClose, deal }) => {
+  // Safe date formatting utility
+  const safeDateFormat = (dateValue, fallback = 'Unknown') => {
+    if (!dateValue) return fallback
+    try {
+      const date = new Date(dateValue)
+      return isNaN(date.getTime()) ? fallback : formatDistanceToNow(date, { addSuffix: true })
+    } catch {
+      return fallback
+    }
+  }
   const [notes, setNotes] = useState([])
   const [contact, setContact] = useState(null)
   const [newNote, setNewNote] = useState("")
@@ -111,16 +124,16 @@ const DealDetailModal = ({ isOpen, onClose, deal }) => {
                 {deal.stage.charAt(0).toUpperCase() + deal.stage.slice(1)}
               </Badge>
             </div>
-            <div>
+<div>
               <h3 className="text-sm font-medium text-gray-500 mb-2">Created</h3>
               <p className="text-sm text-gray-700">
-                {formatDistanceToNow(new Date(deal.createdAt), { addSuffix: true })}
+                {safeDateFormat(deal.createdAt, 'Recently')}
               </p>
             </div>
             <div>
               <h3 className="text-sm font-medium text-gray-500 mb-2">Last Contact</h3>
               <p className="text-sm text-gray-700">
-                {formatDistanceToNow(new Date(deal.lastContact), { addSuffix: true })}
+                {safeDateFormat(deal.lastContact, 'Recently')}
               </p>
             </div>
           </div>
@@ -190,10 +203,10 @@ const DealDetailModal = ({ isOpen, onClose, deal }) => {
                       <div className="w-8 h-8 bg-gradient-to-br from-navy-100 to-blue-100 rounded-full flex items-center justify-center">
                         <ApperIcon name="User" className="w-4 h-4 text-navy-500" />
                       </div>
-                      <span className="text-sm font-medium text-navy-500">You</span>
+<span className="text-sm font-medium text-navy-500">You</span>
                     </div>
                     <span className="text-xs text-gray-500">
-                      {formatDistanceToNow(new Date(note.createdAt), { addSuffix: true })}
+                      {safeDateFormat(note.createdAt, 'recently')}
                     </span>
                   </div>
                   <p className="text-sm text-gray-700 leading-relaxed">{note.content}</p>
