@@ -28,8 +28,8 @@ const PipelineColumn = ({
     setDraggedOver(false)
     
     const dealId = parseInt(e.dataTransfer.getData("text/plain"))
-    if (dealId) {
-      onDragEnd(dealId, stage.name.toLowerCase())
+if (dealId) {
+      onDragEnd(dealId, stage?.name?.toLowerCase() || 'unknown')
     }
   }
 
