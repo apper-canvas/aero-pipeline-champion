@@ -314,9 +314,33 @@ async getByStage(stage) {
         throw new Error("ApperClient not initialized")
       }
 
+// Validate and map stage value to match picklist values
+      const validStages = ['lead', 'qualified', 'proposal', 'won', 'lost'];
+      const stageMapping = {
+        'Lead': 'lead',
+        'Qualified': 'qualified', 
+        'Proposal': 'proposal',
+        'Won': 'won',
+        'Lost': 'lost',
+        // Handle lowercase versions
+        'lead': 'lead',
+        'qualified': 'qualified',
+        'proposal': 'proposal', 
+        'won': 'won',
+        'lost': 'lost'
+      };
+      
+      const mappedStage = stageMapping[stage] || stage?.toLowerCase();
+      
+      if (!validStages.includes(mappedStage)) {
+        console.error(`Invalid stage value: ${stage}. Valid values are: ${validStages.join(', ')}`);
+        toast.error(`Invalid stage value. Please use one of: ${validStages.join(', ')}`);
+        return null;
+      }
+      
       const recordData = { 
         Id: parseInt(id),
-        stage_c: stage
+        stage_c: mappedStage
       }
 
       const params = {
