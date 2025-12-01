@@ -59,10 +59,10 @@ const DealCard = ({ deal, contact, onEdit, onView }) => {
     >
       {/* Deal Header */}
       <div className="flex items-start justify-between mb-3">
-        <div className="flex-1 min-w-0">
-          <h4 className="font-medium text-navy-500 truncate">{deal.title}</h4>
+<div className="flex-1 min-w-0">
+          <h4 className="font-medium text-navy-500 truncate">{deal.title_c || deal.Name}</h4>
           <p className="text-sm text-gray-600 truncate">
-            {contact ? `${contact.name} • ${contact.company}` : 'Unknown Contact'}
+            {contact ? `${contact.Name || contact.name} • ${contact.company_id_c?.Name || contact.company || 'Unknown Company'}` : 'Unknown Contact'}
           </p>
         </div>
         <div className="flex items-center gap-1 ml-2">
@@ -88,9 +88,9 @@ const DealCard = ({ deal, contact, onEdit, onView }) => {
       </div>
 
       {/* Deal Value */}
-      <div className="mb-3">
-        <Badge variant={getValueBadgeVariant(deal.value)} className="text-sm font-semibold">
-          {formatCurrency(deal.value)}
+<div className="mb-3">
+        <Badge variant={getValueBadgeVariant(deal.value_c)} className="text-sm font-semibold">
+          {formatCurrency(deal.value_c || 0)}
         </Badge>
       </div>
 
