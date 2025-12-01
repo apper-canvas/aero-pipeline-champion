@@ -1,0 +1,72 @@
+[
+  {
+    "Id": 1,
+    "contactId": 1,
+    "dealId": 1,
+    "type": "call",
+    "title": "Discovery Call",
+    "description": "Initial call to discuss CRM requirements and current pain points. Client mentioned need for better reporting and team collaboration features.",
+    "createdAt": "2024-01-15T14:30:00Z"
+  },
+  {
+    "Id": 2,
+    "contactId": 1,
+    "dealId": 1,
+    "type": "email",
+    "title": "Follow-up Email",
+    "description": "Sent detailed proposal document and pricing information. Included custom reporting examples they requested.",
+    "createdAt": "2024-01-18T09:15:00Z"
+  },
+  {
+    "Id": 3,
+    "contactId": 2,
+    "dealId": 2,
+    "type": "meeting",
+    "title": "Product Demo",
+    "description": "Conducted 45-minute product demonstration focusing on automation features. Great engagement from their technical team.",
+    "createdAt": "2024-01-22T11:00:00Z"
+  },
+  {
+    "Id": 4,
+    "contactId": 1,
+    "type": "task",
+    "title": "Prepare Custom Quote",
+    "description": "Create customized pricing proposal based on their specific requirements for 25 users with advanced reporting module.",
+    "createdAt": "2024-01-20T16:45:00Z"
+  },
+  {
+    "Id": 5,
+    "contactId": 3,
+    "dealId": 3,
+    "type": "call",
+    "title": "Contract Discussion",
+    "description": "Discussed contract terms and implementation timeline. Minor adjustments requested to payment schedule.",
+    "createdAt": "2024-02-05T13:20:00Z"
+  },
+  {
+    "Id": 6,
+    "contactId": 2,
+    "type": "note",
+    "title": "Client Feedback",
+    "description": "Client provided positive feedback on proposal. Requested minor changes to implementation timeline to accommodate their busy Q1 schedule.",
+    "createdAt": "2024-02-01T15:30:00Z"
+  },
+  {
+    "Id": 7,
+    "contactId": 4,
+    "dealId": 4,
+    "type": "email",
+    "title": "Introduction Email",
+    "description": "Initial outreach email sent with company overview and case studies relevant to their industry.",
+    "createdAt": "2024-02-03T10:00:00Z"
+  },
+  {
+    "Id": 8,
+    "contactId": 1,
+    "dealId": 1,
+    "type": "meeting",
+    "title": "Requirements Review",
+    "description": "In-depth session to review technical requirements and integration needs with their existing systems.",
+    "createdAt": "2024-01-25T14:00:00Z"
+  }
+]

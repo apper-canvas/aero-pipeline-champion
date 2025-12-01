@@ -1,0 +1,35 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import 'react-toastify/dist/ReactToastify.css';
+
+body {
+  font-family: 'Inter', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f5f7fa;
+}
+
+/* Toast styling overrides */
+.Toastify__toast {
+  border-radius: 8px;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+}
+
+.Toastify__toast--success {
+  background: #51cf66;
+}
+
+.Toastify__toast--error {
+  background: #ff6b6b;
+}
+
+.Toastify__toast--info {
+  background: #4dabf7;
+}
+
+.Toastify__toast-container {
+  z-index: 9999;
+}

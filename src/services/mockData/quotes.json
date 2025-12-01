@@ -1,0 +1,150 @@
+[
+  {
+    "Id": 1,
+    "quoteNumber": "QUO-2024-001",
+    "customerId": 1,
+    "customerName": "Acme Corporation",
+    "status": "Pending",
+    "items": [
+      {
+        "id": 1,
+        "description": "Professional Services - Q1",
+        "quantity": 1,
+        "unitPrice": 5000,
+        "total": 5000
+      },
+      {
+        "id": 2,
+        "description": "Software License",
+        "quantity": 10,
+        "unitPrice": 299,
+        "total": 2990
+      }
+    ],
+    "subtotal": 7990,
+    "taxRate": 0.08,
+    "taxAmount": 639.20,
+    "total": 8629.20,
+    "validUntil": "2024-03-15",
+    "createdAt": "2024-01-15T10:00:00Z",
+    "updatedAt": "2024-01-15T10:00:00Z",
+    "notes": "Standard enterprise package with 12 months support included."
+  },
+  {
+    "Id": 2,
+    "quoteNumber": "QUO-2024-002",
+    "customerId": 2,
+    "customerName": "TechStart Inc",
+    "status": "Approved",
+    "items": [
+      {
+        "id": 1,
+        "description": "Website Development",
+        "quantity": 1,
+        "unitPrice": 12000,
+        "total": 12000
+      },
+      {
+        "id": 2,
+        "description": "SEO Optimization",
+        "quantity": 6,
+        "unitPrice": 800,
+        "total": 4800
+      }
+    ],
+    "subtotal": 16800,
+    "taxRate": 0.08,
+    "taxAmount": 1344.00,
+    "total": 18144.00,
+    "validUntil": "2024-02-28",
+    "createdAt": "2024-01-10T14:30:00Z",
+    "updatedAt": "2024-01-20T09:15:00Z",
+    "notes": "Project includes responsive design and mobile optimization."
+  },
+  {
+    "Id": 3,
+    "quoteNumber": "QUO-2024-003",
+    "customerId": 3,
+    "customerName": "Global Solutions Ltd",
+    "status": "Draft",
+    "items": [
+      {
+        "id": 1,
+        "description": "Consulting Services",
+        "quantity": 40,
+        "unitPrice": 150,
+        "total": 6000
+      },
+      {
+        "id": 2,
+        "description": "Training Program",
+        "quantity": 1,
+        "unitPrice": 3500,
+        "total": 3500
+      }
+    ],
+    "subtotal": 9500,
+    "taxRate": 0.08,
+    "taxAmount": 760.00,
+    "total": 10260.00,
+    "validUntil": "2024-04-01",
+    "createdAt": "2024-01-25T16:45:00Z",
+    "updatedAt": "2024-01-25T16:45:00Z",
+    "notes": "Quote pending final approval from client management team."
+  },
+  {
+    "Id": 4,
+    "quoteNumber": "QUO-2024-004",
+    "customerId": 4,
+    "customerName": "Innovation Hub",
+    "status": "Rejected",
+    "items": [
+      {
+        "id": 1,
+        "description": "Software Development",
+        "quantity": 1,
+        "unitPrice": 25000,
+        "total": 25000
+      }
+    ],
+    "subtotal": 25000,
+    "taxRate": 0.08,
+    "taxAmount": 2000.00,
+    "total": 27000.00,
+    "validUntil": "2024-02-15",
+    "createdAt": "2024-01-05T11:20:00Z",
+    "updatedAt": "2024-01-28T13:10:00Z",
+    "notes": "Client decided to go with an alternative solution."
+  },
+  {
+    "Id": 5,
+    "quoteNumber": "QUO-2024-005",
+    "customerId": 5,
+    "customerName": "Future Tech Corp",
+    "status": "Expired",
+    "items": [
+      {
+        "id": 1,
+        "description": "Cloud Migration Services",
+        "quantity": 1,
+        "unitPrice": 18000,
+        "total": 18000
+      },
+      {
+        "id": 2,
+        "description": "Data Migration",
+        "quantity": 1,
+        "unitPrice": 5000,
+        "total": 5000
+      }
+    ],
+    "subtotal": 23000,
+    "taxRate": 0.08,
+    "taxAmount": 1840.00,
+    "total": 24840.00,
+    "validUntil": "2024-01-30",
+    "createdAt": "2024-01-01T09:00:00Z",
+    "updatedAt": "2024-01-01T09:00:00Z",
+    "notes": "Quote has expired. Client may request renewal with updated pricing."
+  }
+]

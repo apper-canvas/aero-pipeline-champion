@@ -1,0 +1,32 @@
+[
+  {
+    "Id": 1,
+    "dealId": 1,
+    "content": "Initial discussion about CRM requirements. They need multi-user access and custom reporting.",
+    "createdAt": "2024-01-20T10:30:00Z"
+  },
+  {
+    "Id": 2,
+    "dealId": 1,
+    "content": "Follow-up call scheduled for next week to discuss pricing and timeline.",
+    "createdAt": "2024-01-25T14:15:00Z"
+  },
+  {
+    "Id": 3,
+    "dealId": 2,
+    "content": "Proposal presentation went well. Decision expected by end of week.",
+    "createdAt": "2024-02-01T11:30:00Z"
+  },
+  {
+    "Id": 4,
+    "dealId": 3,
+    "content": "Contract negotiation in progress. Minor adjustments to timeline requested.",
+    "createdAt": "2024-02-05T16:20:00Z"
+  },
+  {
+    "Id": 5,
+    "dealId": 4,
+    "content": "Discovery call completed. Good fit for our services.",
+    "createdAt": "2024-02-06T09:45:00Z"
+  }
+]

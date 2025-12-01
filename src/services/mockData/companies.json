@@ -1,0 +1,54 @@
+[
+  {
+    "Id": 1,
+    "name": "TechCorp Solutions",
+    "industry": "Technology",
+    "website": "https://techcorp.com",
+    "phone": "+1 (555) 123-4567",
+    "email": "info@techcorp.com",
+    "address": "123 Innovation Drive, San Francisco, CA 94105",
+    "employees": 250,
+    "revenue": 15000000,
+    "notes": "Leading software development company specializing in enterprise solutions",
+    "createdAt": "2024-01-15T10:30:00.000Z"
+  },
+  {
+    "Id": 2,
+    "name": "Global Manufacturing Inc",
+    "industry": "Manufacturing",
+    "website": "https://globalmanuf.com",
+    "phone": "+1 (555) 234-5678",
+    "email": "contact@globalmanuf.com",
+    "address": "456 Industrial Way, Detroit, MI 48201",
+    "employees": 850,
+    "revenue": 45000000,
+    "notes": "Automotive parts manufacturer with 30+ years of experience",
+    "createdAt": "2024-01-10T14:20:00.000Z"
+  },
+  {
+    "Id": 3,
+    "name": "Healthcare Partners",
+    "industry": "Healthcare",
+    "website": "https://healthpartners.com", 
+    "phone": "+1 (555) 345-6789",
+    "email": "admin@healthpartners.com",
+    "address": "789 Medical Center Blvd, Houston, TX 77030",
+    "employees": 420,
+    "revenue": 28000000,
+    "notes": "Multi-specialty healthcare provider serving the greater Houston area",
+    "createdAt": "2024-01-08T09:15:00.000Z"
+  },
+  {
+    "Id": 4,
+    "name": "Financial Advisors Group",
+    "industry": "Finance",
+    "website": "https://finadvgroup.com",
+    "phone": "+1 (555) 456-7890", 
+    "email": "info@finadvgroup.com",
+    "address": "321 Wall Street, New York, NY 10005",
+    "employees": 125,
+    "revenue": 8500000,
+    "notes": "Investment and wealth management services for high-net-worth individuals",
+    "createdAt": "2024-01-05T16:45:00.000Z"
+  }
+]
