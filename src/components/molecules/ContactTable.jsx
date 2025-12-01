@@ -165,8 +165,17 @@ const ContactTable = ({ contacts, deals, onEditContact, onViewContact, onAddDeal
                       {formatCurrency(totalValue)}
                     </div>
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    {formatDistanceToNow(new Date(contact.createdAt), { addSuffix: true })}
+<td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    {(() => {
+                      if (!contact.createdAt) return 'Unknown';
+                      const date = new Date(contact.createdAt);
+                      if (isNaN(date.getTime())) return 'Unknown';
+                      try {
+                        return formatDistanceToNow(date, { addSuffix: true });
+                      } catch (error) {
+                        return 'Unknown';
+                      }
+                    })()}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                     <div className="flex items-center justify-end gap-2">
