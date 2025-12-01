@@ -62,7 +62,8 @@ const PipelineBoard = ({ onAddDeal, onEditDeal, onViewDeal }) => {
     }
   }
 
-  const getDealsByStage = (stageName) => {
+const getDealsByStage = (stageName) => {
+    if (!stageName || !deals) return []
     return deals.filter(deal => deal.stage === stageName.toLowerCase())
   }
 
@@ -92,13 +93,13 @@ const PipelineBoard = ({ onAddDeal, onEditDeal, onViewDeal }) => {
   return (
     <div className="h-full">
       <div className="flex gap-6 overflow-x-auto pb-4 min-h-[600px]">
-        {stages.map((stage) => (
+{stages.map((stage) => (
           <PipelineColumn
             key={stage.Id}
             stage={stage}
-            deals={getDealsByStage(stage.name)}
+            deals={getDealsByStage(stage.Name)}
             contacts={contacts}
-            total={calculateStageTotal(stage.name)}
+            total={calculateStageTotal(stage.Name)}
             onDragEnd={handleDragEnd}
             onEditDeal={onEditDeal}
             onViewDeal={onViewDeal}
