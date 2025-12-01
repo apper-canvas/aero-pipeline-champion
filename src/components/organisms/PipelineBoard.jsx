@@ -42,11 +42,11 @@ const PipelineBoard = ({ onAddDeal, onEditDeal, onViewDeal }) => {
   }, [])
 
   const handleDragEnd = async (dealId, newStage) => {
-    try {
+try {
       // Optimistically update UI
       setDeals(prevDeals =>
         prevDeals.map(deal =>
-          deal.Id === dealId ? { ...deal, stage: newStage } : deal
+          deal.Id === dealId ? { ...deal, stage_c: newStage } : deal
         )
       )
       
@@ -64,7 +64,7 @@ const PipelineBoard = ({ onAddDeal, onEditDeal, onViewDeal }) => {
 
 const getDealsByStage = (stageName) => {
     if (!stageName || !deals) return []
-    return deals.filter(deal => deal.stage === stageName.toLowerCase())
+    return deals.filter(deal => deal.stage_c === stageName.toLowerCase())
   }
 
   const getContactById = (contactId) => {
@@ -72,8 +72,8 @@ const getDealsByStage = (stageName) => {
   }
 
   const calculateStageTotal = (stageName) => {
-    const stageDeals = getDealsByStage(stageName)
-    return stageDeals.reduce((total, deal) => total + deal.value, 0)
+const stageDeals = getDealsByStage(stageName)
+    return stageDeals.reduce((total, deal) => total + (deal.value_c || 0), 0)
   }
 
   if (loading) return <Loading />

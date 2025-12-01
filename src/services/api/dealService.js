@@ -2,7 +2,7 @@ import { getApperClient } from '@/services/apperClient'
 import { toast } from 'react-toastify'
 
 export const dealService = {
-  async getAll() {
+async getAll() {
     try {
       const apperClient = getApperClient()
       if (!apperClient) {
@@ -18,6 +18,7 @@ export const dealService = {
           {"field": {"Name": "stage_c"}},
           {"field": {"Name": "notes_c"}},
           {"field": {"Name": "contact_id_c"}, "referenceField": {"field": {"Name": "Name"}}},
+          {"field": {"Name": "company_id_c"}, "referenceField": {"field": {"Name": "Name"}}},
           {"field": {"Name": "CreatedOn"}},
           {"field": {"Name": "ModifiedOn"}}
         ]
@@ -39,7 +40,7 @@ export const dealService = {
     }
   },
 
-  async getById(id) {
+async getById(id) {
     try {
       const apperClient = getApperClient()
       if (!apperClient) {
@@ -55,6 +56,7 @@ export const dealService = {
           {"field": {"Name": "stage_c"}},
           {"field": {"Name": "notes_c"}},
           {"field": {"Name": "contact_id_c"}, "referenceField": {"field": {"Name": "Name"}}},
+          {"field": {"Name": "company_id_c"}, "referenceField": {"field": {"Name": "Name"}}},
           {"field": {"Name": "CreatedOn"}},
           {"field": {"Name": "ModifiedOn"}}
         ]
@@ -76,7 +78,7 @@ export const dealService = {
     }
   },
 
-  async getByContactId(contactId) {
+async getByContactId(contactId) {
     try {
       const apperClient = getApperClient()
       if (!apperClient) {
@@ -92,6 +94,7 @@ export const dealService = {
           {"field": {"Name": "stage_c"}},
           {"field": {"Name": "notes_c"}},
           {"field": {"Name": "contact_id_c"}, "referenceField": {"field": {"Name": "Name"}}},
+          {"field": {"Name": "company_id_c"}, "referenceField": {"field": {"Name": "Name"}}},
           {"field": {"Name": "CreatedOn"}},
           {"field": {"Name": "ModifiedOn"}}
         ],
@@ -116,7 +119,7 @@ export const dealService = {
     }
   },
 
-  async getByStage(stage) {
+async getByStage(stage) {
     try {
       const apperClient = getApperClient()
       if (!apperClient) {
@@ -132,6 +135,7 @@ export const dealService = {
           {"field": {"Name": "stage_c"}},
           {"field": {"Name": "notes_c"}},
           {"field": {"Name": "contact_id_c"}, "referenceField": {"field": {"Name": "Name"}}},
+          {"field": {"Name": "company_id_c"}, "referenceField": {"field": {"Name": "Name"}}},
           {"field": {"Name": "CreatedOn"}},
           {"field": {"Name": "ModifiedOn"}}
         ],

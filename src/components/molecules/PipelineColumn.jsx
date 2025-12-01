@@ -82,11 +82,11 @@ const PipelineColumn = ({
 <p className="text-sm text-gray-500">No deals in {stage?.name?.toLowerCase() || 'this stage'}</p>
           </div>
         ) : (
-          deals.map((deal) => (
+deals.map((deal) => (
             <DealCard
               key={deal.Id}
               deal={deal}
-              contact={getContactById(deal.contactId)}
+              contact={getContactById(deal.contact_id_c?.Id)}
               onEdit={() => onEditDeal(deal)}
               onView={() => onViewDeal(deal)}
             />
