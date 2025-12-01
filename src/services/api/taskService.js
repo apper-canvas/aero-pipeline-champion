@@ -1,5 +1,23 @@
-import { getApperClient } from '@/services/apperClient'
-import { toast } from 'react-toastify'
+import { toast } from "react-toastify";
+import { getApperClient } from "@/services/apperClient";
+
+// Helper function to transform database fields to UI-friendly property names
+function transformTaskData(record) {
+  if (!record) return null
+  
+  return {
+    ...record,
+    title: record.title_c || '',
+    description: record.description_c || '',
+    assignee: record.assignee_c || '',
+    dealId: record.deal_id_c || null,
+    dueDate: record.due_date_c || null,
+    priority: record.priority_c || '',
+    status: record.status_c || '',
+    createdAt: record.CreatedOn || null,
+    updatedAt: record.ModifiedOn || null
+  }
+}
 
 export const taskService = {
   async getAll() {
@@ -33,7 +51,8 @@ export const taskService = {
         return []
       }
 
-      return response.data || []
+const transformedData = (response.data || []).map(transformTaskData)
+      return transformedData
     } catch (error) {
       console.error("Error fetching tasks:", error?.response?.data?.message || error)
       toast.error("Failed to load tasks")
@@ -72,7 +91,7 @@ export const taskService = {
         return null
       }
 
-      return response.data
+return transformTaskData(response.data)
     } catch (error) {
       console.error(`Error fetching task ${id}:`, error?.response?.data?.message || error)
       toast.error("Failed to load task")
@@ -124,7 +143,7 @@ export const taskService = {
           })
         }
         
-        return successful.length > 0 ? successful[0].data : null
+return successful.length > 0 ? transformTaskData(successful[0].data) : null
       }
 
       return null
@@ -179,7 +198,7 @@ export const taskService = {
           })
         }
         
-        return successful.length > 0 ? successful[0].data : null
+return successful.length > 0 ? transformTaskData(successful[0].data) : null
       }
 
       return null
@@ -220,7 +239,7 @@ export const taskService = {
           })
         }
         
-        return successful.length > 0 ? successful[0].data : null
+return successful.length > 0 ? transformTaskData(successful[0].data) : null
       }
 
       return null
@@ -266,7 +285,8 @@ export const taskService = {
         return []
       }
 
-      return response.data || []
+const transformedData = (response.data || []).map(transformTaskData)
+      return transformedData
     } catch (error) {
       console.error("Error fetching tasks by status:", error?.response?.data?.message || error)
       return []
@@ -308,7 +328,8 @@ export const taskService = {
         return []
       }
 
-      return response.data || []
+const transformedData = (response.data || []).map(transformTaskData)
+      return transformedData
     } catch (error) {
       console.error("Error fetching tasks by priority:", error?.response?.data?.message || error)
       return []
@@ -367,7 +388,8 @@ export const taskService = {
         return []
       }
 
-      return response.data || []
+const transformedData = (response.data || []).map(transformTaskData)
+      return transformedData
     } catch (error) {
       console.error("Error fetching overdue tasks:", error?.response?.data?.message || error)
       return []
@@ -424,7 +446,8 @@ export const taskService = {
         return []
       }
 
-      return response.data || []
+const transformedData = (response.data || []).map(transformTaskData)
+      return transformedData
     } catch (error) {
       console.error("Error searching tasks:", error?.response?.data?.message || error)
       return []
