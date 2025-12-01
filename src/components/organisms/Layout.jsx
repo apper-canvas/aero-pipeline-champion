@@ -8,7 +8,8 @@ const navigation = [
   { name: "Tasks", href: "/tasks", icon: "CheckSquare" },
   { name: "Contacts", href: "/contacts", icon: "Users" },
   { name: "Companies", href: "/companies", icon: "Building2" },
-  { name: "Quotes", href: "/quotes", icon: "FileText" }
+  { name: "Quotes", href: "/quotes", icon: "FileText" },
+  { name: "Sales Orders", href: "/sales-orders", icon: "ShoppingCart" }
 ]
 
 const Layout = () => {

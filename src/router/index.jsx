@@ -9,13 +9,13 @@ const PipelinePage = lazy(() => import('@/components/pages/Pipeline'))
 const ContactsPage = lazy(() => import('@/components/pages/Contacts'))
 const CompaniesPage = lazy(() => import('@/components/pages/Companies'))
 const QuotesPage = lazy(() => import('@/components/pages/Quotes'))
+const SalesOrdersPage = lazy(() => import('@/components/pages/SalesOrders'))
 const TasksPage = lazy(() => import('@/components/pages/Tasks'))
 const NotFoundPage = lazy(() => import('@/components/pages/NotFound'))
 const LoginPage = lazy(() => import('@/components/pages/Login'))
 const SignupPage = lazy(() => import('@/components/pages/Signup'))
 const CallbackPage = lazy(() => import('@/components/pages/Callback'))
 const ErrorPage = lazy(() => import('@/components/pages/ErrorPage'))
-
 const SuspenseWrapper = ({ children }) => (
   <Suspense fallback={
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100">
@@ -86,6 +86,10 @@ const mainRoutes = [
   createRoute({
     path: "quotes",
     element: <QuotesPage />
+  }),
+  createRoute({
+    path: "sales-orders",
+    element: <SalesOrdersPage />
   }),
   createRoute({
     path: "tasks",

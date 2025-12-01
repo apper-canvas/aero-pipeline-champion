@@ -4,12 +4,13 @@
       "when": {
         "conditions": [
           {
-            "label": "User must be authenticated to access CRM",
+            "label": "User must be logged in to access pipeline",
             "rule": "authenticated"
           }
         ]
       },
-      "redirectOnDeny": "/login"
+      "redirectOnDeny": "/login",
+      "excludeRedirectQuery": false
     }
   },
   "/pipeline": {
@@ -17,7 +18,7 @@
       "when": {
         "conditions": [
           {
-            "label": "User must be authenticated to access pipeline",
+            "label": "User must be logged in to view pipeline",
             "rule": "authenticated"
           }
         ]
@@ -30,7 +31,7 @@
       "when": {
         "conditions": [
           {
-            "label": "User must be authenticated to access contacts",
+            "label": "User must be logged in to view contacts",
             "rule": "authenticated"
           }
         ]
@@ -43,7 +44,7 @@
       "when": {
         "conditions": [
           {
-            "label": "User must be authenticated to access companies",
+            "label": "User must be logged in to view companies",
             "rule": "authenticated"
           }
         ]
@@ -56,7 +57,20 @@
       "when": {
         "conditions": [
           {
-            "label": "User must be authenticated to access quotes",
+            "label": "User must be logged in to view quotes",
+            "rule": "authenticated"
+          }
+        ]
+      },
+      "redirectOnDeny": "/login"
+    }
+  },
+  "/sales-orders": {
+    "allow": {
+      "when": {
+        "conditions": [
+          {
+            "label": "User must be logged in to view sales orders",
             "rule": "authenticated"
           }
         ]
@@ -69,7 +83,7 @@
       "when": {
         "conditions": [
           {
-            "label": "User must be authenticated to access tasks",
+            "label": "User must be logged in to view tasks",
             "rule": "authenticated"
           }
         ]
@@ -85,7 +99,8 @@
             "label": "Login page is public",
             "rule": "public"
           }
-        ]
+        ],
+        "operator": "OR"
       }
     }
   },
@@ -97,7 +112,8 @@
             "label": "Signup page is public",
             "rule": "public"
           }
-        ]
+        ],
+        "operator": "OR"
       }
     }
   },
@@ -109,7 +125,8 @@
             "label": "Callback page is public",
             "rule": "public"
           }
-        ]
+        ],
+        "operator": "OR"
       }
     }
   },
@@ -121,7 +138,8 @@
             "label": "Error page is public",
             "rule": "public"
           }
-        ]
+        ],
+        "operator": "OR"
       }
     }
   }
