@@ -78,7 +78,10 @@ const DealDetailModal = ({ isOpen, onClose, deal }) => {
     }).format(amount)
   }
 
-  const getStageColor = (stage) => {
+const getStageColor = (stage) => {
+    if (!stage || typeof stage !== 'string') {
+      return "default"
+    }
     const colors = {
       lead: "default",
       qualified: "primary",
@@ -119,9 +122,12 @@ const DealDetailModal = ({ isOpen, onClose, deal }) => {
               <p className="text-2xl font-bold text-navy-500">{formatCurrency(deal.value)}</p>
             </div>
             <div>
-              <h3 className="text-sm font-medium text-gray-500 mb-2">Stage</h3>
+<h3 className="text-sm font-medium text-gray-500 mb-2">Stage</h3>
               <Badge variant={getStageColor(deal.stage)} className="text-sm">
-                {deal.stage.charAt(0).toUpperCase() + deal.stage.slice(1)}
+                {deal.stage && typeof deal.stage === 'string' 
+                  ? deal.stage.charAt(0).toUpperCase() + deal.stage.slice(1)
+                  : 'Unknown'
+                }
               </Badge>
             </div>
 <div>
