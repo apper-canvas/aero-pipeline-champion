@@ -79,7 +79,7 @@ const PipelineColumn = ({
         {deals.length === 0 ? (
           <div className="text-center py-8">
             <ApperIcon name="Inbox" className="w-8 h-8 text-gray-400 mx-auto mb-2" />
-            <p className="text-sm text-gray-500">No deals in {stage.name.toLowerCase()}</p>
+<p className="text-sm text-gray-500">No deals in {stage?.name?.toLowerCase() || 'this stage'}</p>
           </div>
         ) : (
           deals.map((deal) => (
