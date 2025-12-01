@@ -135,25 +135,25 @@ const PipelineList = ({ onAddDeal, onEditDeal, onViewDeal }) => {
 <table className="w-full table-fixed">
           <thead>
             <tr className="border-b border-gray-200 bg-gray-50">
-              <th className="w-1/4 px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+<th className="w-1/4 px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Deal
               </th>
               <th className="w-1/5 px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Contact
               </th>
-              <th className="w-1/8 px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th className="w-1/6 px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Stage
               </th>
-              <th className="w-1/8 px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th className="w-1/6 px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Value
               </th>
-              <th className="w-1/10 px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th className="w-1/12 px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Priority
               </th>
               <th className="w-1/6 px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Last Updated
               </th>
-              <th className="w-1/12 px-4 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th className="w-16 px-4 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Actions
               </th>
             </tr>
@@ -164,11 +164,11 @@ const PipelineList = ({ onAddDeal, onEditDeal, onViewDeal }) => {
               const stage = getStageById(deal.stage_id_c)
               
               return (
-                <tr key={deal.Id} className="hover:bg-gray-50 transition-colors">
-                  <td className="px-4 py-4 w-1/4">
+<tr key={deal.Id} className="hover:bg-gray-50 transition-colors">
+                  <td className="px-4 py-4">
                     <div className="flex flex-col">
-                      <span className="text-sm font-medium text-gray-900 truncate" title={deal.name_c || 'Untitled Deal'}>
-                        {deal.name_c || 'Untitled Deal'}
+                      <span className="text-sm font-medium text-gray-900 truncate" title={deal.title_c || deal.Name || 'Untitled Deal'}>
+                        {deal.title_c || deal.Name || 'Untitled Deal'}
                       </span>
                       {deal.description_c && (
                         <span className="text-xs text-gray-500 mt-1 line-clamp-2 leading-4" title={deal.description_c}>
@@ -181,7 +181,7 @@ const PipelineList = ({ onAddDeal, onEditDeal, onViewDeal }) => {
                     </div>
                   </td>
                   
-                  <td className="px-4 py-4 w-1/5">
+                  <td className="px-4 py-4">
                     <div className="flex flex-col">
                       <span className="text-sm text-gray-900 truncate" title={contact ? `${contact.first_name_c || ''} ${contact.last_name_c || ''}`.trim() : 'No contact'}>
                         {contact ? `${contact.first_name_c || ''} ${contact.last_name_c || ''}`.trim() || 'No name' : 'No contact'}
@@ -194,31 +194,31 @@ const PipelineList = ({ onAddDeal, onEditDeal, onViewDeal }) => {
                     </div>
                   </td>
                   
-                  <td className="px-4 py-4 w-1/8">
+                  <td className="px-4 py-4">
                     <Badge variant="outline" className="inline-flex items-center">
                       {stage?.name_c || 'Unknown'}
                     </Badge>
                   </td>
                   
-                  <td className="px-4 py-4 w-1/8">
+                  <td className="px-4 py-4">
                     <Badge variant={getValueBadgeVariant(deal.value_c)} className="inline-flex items-center font-medium">
                       {formatCurrency(deal.value_c || 0)}
                     </Badge>
                   </td>
                   
-                  <td className="px-4 py-4 w-1/10">
+                  <td className="px-4 py-4">
                     <Badge variant={getPriorityBadgeVariant(deal.priority_c)} className="inline-flex items-center">
                       {deal.priority_c || 'Normal'}
                     </Badge>
                   </td>
                   
-                  <td className="px-4 py-4 w-1/6 text-sm text-gray-500">
+                  <td className="px-4 py-4 text-sm text-gray-500">
                     <span title={deal.date_modified}>
                       {safeDateFormat(deal.date_modified)}
                     </span>
                   </td>
                   
-                  <td className="px-4 py-4 w-1/12 text-right">
+                  <td className="px-4 py-4 text-right">
                     <div className="flex items-center justify-end gap-1">
                       <button
                         onClick={() => onViewDeal(deal)}
