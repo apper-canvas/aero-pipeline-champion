@@ -15,8 +15,8 @@ const Layout = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const location = useLocation()
 
-  return (
-    <div className="min-h-screen bg-background">
+return (
+    <div className="h-screen bg-background grid grid-cols-1 md:grid-cols-[256px_1fr] grid-rows-[auto_1fr] md:grid-rows-1">
       {/* Mobile sidebar backdrop */}
       {sidebarOpen && (
         <div
@@ -26,9 +26,9 @@ const Layout = () => {
       )}
 
       {/* Sidebar */}
-      <div className={`fixed inset-y-0 left-0 z-50 w-64 bg-white shadow-lg transform transition-transform duration-300 ease-in-out ${
-        sidebarOpen ? 'translate-x-0' : '-translate-x-full'
-      } md:translate-x-0 md:static md:inset-0`}>
+      <div className={`fixed inset-y-0 left-0 z-50 w-64 bg-white shadow-lg transform transition-transform duration-300 ease-in-out md:relative md:transform-none md:shadow-none md:z-0 ${
+        sidebarOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'
+      }`}>
         <div className="flex flex-col h-full">
           <div className="flex items-center justify-between p-4 border-b">
             <h2 className="text-lg font-semibold text-navy-500">Menu</h2>
@@ -39,7 +39,7 @@ const Layout = () => {
               <ApperIcon name="X" className="w-5 h-5" />
             </button>
           </div>
-          <nav className="flex-1 p-4 space-y-2">
+          <nav className="flex-1 p-4 space-y-2 overflow-y-auto">
             {navigation.map((item) => {
               const isActive = location.pathname === item.href || 
                              (item.href === "/pipeline" && location.pathname === "/")
@@ -63,11 +63,16 @@ const Layout = () => {
         </div>
       </div>
 
-      {/* Main content */}
-      <div className="md:ml-64">
+      {/* Main content area */}
+      <div className="flex flex-col min-h-0 col-span-1 row-span-1">
+        {/* Header */}
         <Header onMenuClick={() => setSidebarOpen(true)} />
-        <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <Outlet />
+        
+        {/* Scrollable content */}
+        <main className="flex-1 overflow-y-auto px-4 sm:px-6 lg:px-8 py-6">
+          <div className="max-w-7xl mx-auto">
+            <Outlet />
+          </div>
         </main>
       </div>
     </div>
