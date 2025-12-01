@@ -33,11 +33,32 @@ export const getAll = async () => {
       return []
     }
 
-    return response.data || []
+// Transform database field names to frontend field names
+    const transformedData = (response.data || []).map(transformCompanyData)
+    return transformedData
   } catch (error) {
     console.error("Error fetching companies:", error?.response?.data?.message || error)
     toast.error("Failed to load companies")
     return []
+  }
+}
+
+// Transform database field names to frontend expected field names
+const transformCompanyData = (company) => {
+  if (!company) return null
+  
+  return {
+    Id: company.Id,
+    name: company.Name,
+    industry: company.industry_c,
+    website: company.website_c,
+    phone: company.phone_c,
+    email: company.email_c,
+    address: company.address_c,
+    employees: company.employees_c,
+    revenue: company.revenue_c,
+    notes: company.notes_c,
+    createdAt: company.CreatedOn
   }
 }
 
@@ -72,7 +93,8 @@ export const getById = async (id) => {
       return null
     }
 
-    return response.data
+// Transform database field names to frontend field names
+    return transformCompanyData(response.data)
   } catch (error) {
     console.error(`Error fetching company ${id}:`, error?.response?.data?.message || error)
     toast.error("Failed to load company")
