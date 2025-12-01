@@ -63,23 +63,23 @@ function QuoteDetailModal({ isOpen, onClose, quote, onEdit }) {
               <div className="space-y-4">
                 <div>
                   <h3 className="text-sm font-medium text-gray-500 mb-1">Customer</h3>
-                  <p className="text-lg font-medium text-navy-600">{quote.customerName}</p>
+<p className="text-lg font-medium text-navy-600">{quote.customer_name_c || 'N/A'}</p>
                 </div>
                 
                 <div>
                   <h3 className="text-sm font-medium text-gray-500 mb-1">Quote Number</h3>
-                  <p className="text-base font-mono text-gray-900">{quote.quoteNumber}</p>
+<p className="text-base font-mono text-gray-900">{quote.quote_number_c || 'N/A'}</p>
                 </div>
               </div>
 
               <div className="space-y-4">
                 <div>
                   <h3 className="text-sm font-medium text-gray-500 mb-1">Valid Until</h3>
-                  <p className="text-base text-gray-900">
+<p className="text-base text-gray-900">
 {(() => {
-                      if (!quote.validUntil) return 'Not set';
+                      if (!quote.valid_until_c) return 'Not set';
                       try {
-                        const date = new Date(quote.validUntil);
+                        const date = new Date(quote.valid_until_c);
                         if (isNaN(date.getTime())) return 'Invalid date';
                         return date.toLocaleDateString('en-US', {
                           year: 'numeric',
@@ -95,8 +95,8 @@ function QuoteDetailModal({ isOpen, onClose, quote, onEdit }) {
                 
                 <div>
 <h3 className="text-sm font-medium text-gray-500 mb-1">Created</h3>
-                  <p className="text-base text-gray-900">
-                    {safeDateFormat(quote.createdAt)}
+<p className="text-base text-gray-900">
+                    {safeDateFormat(quote.CreatedOn)}
                   </p>
                 </div>
               </div>
@@ -123,23 +123,36 @@ function QuoteDetailModal({ isOpen, onClose, quote, onEdit }) {
                       </th>
                     </tr>
                   </thead>
-                  <tbody className="bg-white divide-y divide-gray-200">
-                    {quote.items.map((item, index) => (
-                      <tr key={index}>
-                        <td className="px-6 py-4">
-                          <div className="text-sm font-medium text-gray-900">{item.description}</div>
-                        </td>
-                        <td className="px-6 py-4 text-center">
-                          <div className="text-sm text-gray-900">{item.quantity}</div>
-                        </td>
-                        <td className="px-6 py-4 text-right">
-                          <div className="text-sm text-gray-900">{formatCurrency(item.unitPrice)}</div>
-                        </td>
-                        <td className="px-6 py-4 text-right">
-                          <div className="text-sm font-medium text-gray-900">{formatCurrency(item.total)}</div>
-                        </td>
-                      </tr>
-                    ))}
+<tbody className="bg-white divide-y divide-gray-200">
+                    {(() => {
+                      try {
+                        const items = quote.items_c ? (typeof quote.items_c === 'string' ? JSON.parse(quote.items_c) : quote.items_c) : [];
+                        return items.map((item, index) => (
+                          <tr key={index}>
+                            <td className="px-6 py-4">
+                              <div className="text-sm font-medium text-gray-900">{item.description || 'N/A'}</div>
+                            </td>
+                            <td className="px-6 py-4 text-center">
+                              <div className="text-sm text-gray-900">{item.quantity || 0}</div>
+                            </td>
+                            <td className="px-6 py-4 text-right">
+                              <div className="text-sm text-gray-900">{formatCurrency(item.unitPrice || 0)}</div>
+                            </td>
+                            <td className="px-6 py-4 text-right">
+                              <div className="text-sm font-medium text-gray-900">{formatCurrency(item.total || 0)}</div>
+                            </td>
+                          </tr>
+                        ));
+                      } catch {
+                        return (
+                          <tr>
+                            <td colSpan="4" className="px-6 py-4 text-center text-gray-500">
+                              No items available
+                            </td>
+                          </tr>
+                        );
+                      }
+                    })()}
                   </tbody>
                 </table>
               </div>
@@ -151,27 +164,27 @@ function QuoteDetailModal({ isOpen, onClose, quote, onEdit }) {
               <div className="space-y-3">
                 <div className="flex justify-between text-base">
                   <span className="text-gray-600">Subtotal:</span>
-                  <span className="font-medium text-gray-900">{formatCurrency(quote.subtotal)}</span>
+<span className="font-medium text-gray-900">{formatCurrency(quote.subtotal_c || 0)}</span>
                 </div>
                 <div className="flex justify-between text-base">
-                  <span className="text-gray-600">Tax ({(quote.taxRate * 100).toFixed(2)}%):</span>
-                  <span className="font-medium text-gray-900">{formatCurrency(quote.taxAmount)}</span>
+<span className="text-gray-600">Tax ({((quote.tax_rate_c || 0) * 100).toFixed(2)}%):</span>
+                  <span className="font-medium text-gray-900">{formatCurrency(quote.tax_amount_c || 0)}</span>
                 </div>
                 <div className="border-t border-gray-300 pt-3">
                   <div className="flex justify-between text-xl">
                     <span className="font-medium text-navy-500">Total:</span>
-                    <span className="font-bold text-navy-600">{formatCurrency(quote.total)}</span>
+<span className="font-bold text-navy-600">{formatCurrency(quote.total_c || 0)}</span>
                   </div>
                 </div>
               </div>
             </div>
 
             {/* Notes */}
-            {quote.notes && (
+{quote.notes_c && (
               <div>
                 <h3 className="text-lg font-medium text-navy-500 mb-3">Notes</h3>
                 <div className="bg-gray-50 rounded-lg p-4">
-                  <p className="text-gray-700 whitespace-pre-wrap">{quote.notes}</p>
+                  <p className="text-gray-700 whitespace-pre-wrap">{quote.notes_c}</p>
                 </div>
               </div>
             )}

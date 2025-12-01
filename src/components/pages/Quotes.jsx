@@ -55,16 +55,16 @@ function Quotes() {
   useEffect(() => {
     let filtered = quotes
 
-    if (searchQuery) {
+if (searchQuery) {
       filtered = filtered.filter(quote => 
-        quote.quoteNumber.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        quote.customerName.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        quote.notes.toLowerCase().includes(searchQuery.toLowerCase())
+        (quote.quote_number_c || '').toLowerCase().includes(searchQuery.toLowerCase()) ||
+        (quote.customer_name_c || '').toLowerCase().includes(searchQuery.toLowerCase()) ||
+        (quote.notes_c || '').toLowerCase().includes(searchQuery.toLowerCase())
       )
     }
 
-    if (statusFilter !== 'All') {
-      filtered = filtered.filter(quote => quote.status === statusFilter)
+if (statusFilter !== 'All') {
+      filtered = filtered.filter(quote => quote.status_c === statusFilter)
     }
 
     setFilteredQuotes(filtered)
@@ -197,8 +197,8 @@ function Quotes() {
           <div className="flex items-center justify-between">
             <div>
               <p className="text-sm font-medium text-gray-600">Pending</p>
-              <p className="text-2xl font-bold text-yellow-600">
-                {quotes.filter(q => q.status === 'Pending').length}
+<p className="text-2xl font-bold text-yellow-600">
+                {quotes.filter(q => q.status_c === 'Pending').length}
               </p>
             </div>
             <div className="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center">
@@ -211,8 +211,8 @@ function Quotes() {
           <div className="flex items-center justify-between">
             <div>
               <p className="text-sm font-medium text-gray-600">Approved</p>
-              <p className="text-2xl font-bold text-green-600">
-                {quotes.filter(q => q.status === 'Approved').length}
+<p className="text-2xl font-bold text-green-600">
+                {quotes.filter(q => q.status_c === 'Approved').length}
               </p>
             </div>
             <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
@@ -225,8 +225,8 @@ function Quotes() {
           <div className="flex items-center justify-between">
             <div>
               <p className="text-sm font-medium text-gray-600">Total Value</p>
-              <p className="text-2xl font-bold text-navy-500">
-                {formatCurrency(quotes.reduce((sum, q) => sum + q.total, 0))}
+<p className="text-2xl font-bold text-navy-500">
+                {formatCurrency(quotes.reduce((sum, q) => sum + (q.total_c || 0), 0))}
               </p>
             </div>
             <div className="w-12 h-12 bg-coral-100 rounded-lg flex items-center justify-center">
@@ -276,30 +276,30 @@ function Quotes() {
               <tbody className="bg-white divide-y divide-gray-200">
                 {filteredQuotes.map((quote) => (
                   <tr key={quote.Id} className="hover:bg-gray-50">
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="font-medium text-navy-600">{quote.quoteNumber}</div>
+<td className="px-6 py-4 whitespace-nowrap">
+                      <div className="font-medium text-navy-600">{quote.quote_number_c || 'N/A'}</div>
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="text-sm text-gray-900">{quote.customerName}</div>
+<td className="px-6 py-4 whitespace-nowrap">
+                      <div className="text-sm text-gray-900">{quote.customer_name_c || 'N/A'}</div>
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getStatusColor(quote.status)}`}>
-                        {quote.status}
+<td className="px-6 py-4 whitespace-nowrap">
+                      <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getStatusColor(quote.status_c)}`}>
+                        {quote.status_c || 'Draft'}
                       </span>
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
+<td className="px-6 py-4 whitespace-nowrap">
                       <div className="text-sm font-medium text-gray-900">
-                        {formatCurrency(quote.total)}
-                      </div>
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="text-sm text-gray-500">
-                        {new Date(quote.validUntil).toLocaleDateString()}
+                        {formatCurrency(quote.total_c || 0)}
                       </div>
                     </td>
 <td className="px-6 py-4 whitespace-nowrap">
                       <div className="text-sm text-gray-500">
-                        {safeDateFormat(quote.createdAt)}
+                        {quote.valid_until_c ? new Date(quote.valid_until_c).toLocaleDateString() : 'N/A'}
+                      </div>
+                    </td>
+<td className="px-6 py-4 whitespace-nowrap">
+                      <div className="text-sm text-gray-500">
+                        {safeDateFormat(quote.CreatedOn)}
                       </div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
