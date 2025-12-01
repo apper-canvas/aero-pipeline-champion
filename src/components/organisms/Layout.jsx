@@ -9,7 +9,8 @@ const navigation = [
   { name: "Contacts", href: "/contacts", icon: "Users" },
   { name: "Companies", href: "/companies", icon: "Building2" },
   { name: "Quotes", href: "/quotes", icon: "FileText" },
-  { name: "Sales Orders", href: "/sales-orders", icon: "ShoppingCart" }
+  { name: "Sales Orders", href: "/sales-orders", icon: "ShoppingCart" },
+  { name: "Reports", href: "/reports", icon: "BarChart" }
 ]
 
 const Layout = () => {
