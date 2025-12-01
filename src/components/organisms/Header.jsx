@@ -1,8 +1,7 @@
-import { Link, useLocation } from 'react-router-dom'
-import ApperIcon from '@/components/ApperIcon'
-import SearchBar from '@/components/molecules/SearchBar'
-import { useState } from 'react'
-
+import { Link, useLocation } from "react-router-dom";
+import React, { useState } from "react";
+import ApperIcon from "@/components/ApperIcon";
+import SearchBar from "@/components/molecules/SearchBar";
 const Header = () => {
   const location = useLocation()
   const [searchQuery, setSearchQuery] = useState("")
@@ -106,5 +105,3 @@ const navigation = [
     </header>
   )
 }
-
-export default Header

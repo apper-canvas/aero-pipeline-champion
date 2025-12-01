@@ -1,102 +1,232 @@
-import companiesData from '@/services/mockData/companies.json'
-
-// In-memory storage for companies
-let companies = [...companiesData]
-
-// Utility function to simulate API delay
-const delay = (ms = 300) => new Promise(resolve => setTimeout(resolve, ms))
-
-// Generate next available ID
-const getNextId = () => {
-  const maxId = companies.length > 0 ? Math.max(...companies.map(c => c.Id)) : 0
-  return maxId + 1
-}
+import { getApperClient } from '@/services/apperClient'
+import { toast } from 'react-toastify'
 
 // Get all companies
 export const getAll = async () => {
-  await delay()
-  return [...companies] // Return copy to prevent direct mutation
+  try {
+    const apperClient = getApperClient()
+    if (!apperClient) {
+      throw new Error("ApperClient not initialized")
+    }
+
+    const params = {
+      fields: [
+        {"field": {"Name": "Id"}},
+        {"field": {"Name": "Name"}},
+        {"field": {"Name": "industry_c"}},
+        {"field": {"Name": "website_c"}},
+        {"field": {"Name": "phone_c"}},
+        {"field": {"Name": "email_c"}},
+        {"field": {"Name": "address_c"}},
+        {"field": {"Name": "employees_c"}},
+        {"field": {"Name": "revenue_c"}},
+        {"field": {"Name": "notes_c"}},
+        {"field": {"Name": "CreatedOn"}}
+      ]
+    }
+
+    const response = await apperClient.fetchRecords('company_c', params)
+
+    if (!response.success) {
+      console.error(response.message)
+      toast.error(response.message)
+      return []
+    }
+
+    return response.data || []
+  } catch (error) {
+    console.error("Error fetching companies:", error?.response?.data?.message || error)
+    toast.error("Failed to load companies")
+    return []
+  }
 }
 
-// Get company by ID
 export const getById = async (id) => {
-  await delay()
-  const company = companies.find(c => c.Id === parseInt(id))
-  if (!company) {
-    throw new Error(`Company with ID ${id} not found`)
+  try {
+    const apperClient = getApperClient()
+    if (!apperClient) {
+      throw new Error("ApperClient not initialized")
+    }
+
+    const params = {
+      fields: [
+        {"field": {"Name": "Id"}},
+        {"field": {"Name": "Name"}},
+        {"field": {"Name": "industry_c"}},
+        {"field": {"Name": "website_c"}},
+        {"field": {"Name": "phone_c"}},
+        {"field": {"Name": "email_c"}},
+        {"field": {"Name": "address_c"}},
+        {"field": {"Name": "employees_c"}},
+        {"field": {"Name": "revenue_c"}},
+        {"field": {"Name": "notes_c"}},
+        {"field": {"Name": "CreatedOn"}}
+      ]
+    }
+
+    const response = await apperClient.getRecordById('company_c', parseInt(id), params)
+
+    if (!response.success) {
+      console.error(response.message)
+      toast.error(response.message)
+      return null
+    }
+
+    return response.data
+  } catch (error) {
+    console.error(`Error fetching company ${id}:`, error?.response?.data?.message || error)
+    toast.error("Failed to load company")
+    return null
   }
-  return { ...company } // Return copy
 }
 
-// Create new company
 export const create = async (companyData) => {
-  await delay()
-  
-  // Validate required fields
-  if (!companyData.name?.trim()) {
-    throw new Error('Company name is required')
+  try {
+    const apperClient = getApperClient()
+    if (!apperClient) {
+      throw new Error("ApperClient not initialized")
+    }
+
+    // Filter out empty fields and map to database field names
+    const recordData = {}
+    if (companyData.name?.trim()) recordData.Name = companyData.name.trim()
+    if (companyData.industry?.trim()) recordData.industry_c = companyData.industry.trim()
+    if (companyData.website?.trim()) recordData.website_c = companyData.website.trim()
+    if (companyData.phone?.trim()) recordData.phone_c = companyData.phone.trim()
+    if (companyData.email?.trim()) recordData.email_c = companyData.email.trim()
+    if (companyData.address?.trim()) recordData.address_c = companyData.address.trim()
+    if (companyData.employees !== undefined && companyData.employees !== '') recordData.employees_c = parseInt(companyData.employees) || 0
+    if (companyData.revenue !== undefined && companyData.revenue !== '') recordData.revenue_c = parseFloat(companyData.revenue) || 0
+    if (companyData.notes?.trim()) recordData.notes_c = companyData.notes.trim()
+
+    const params = {
+      records: [recordData]
+    }
+
+    const response = await apperClient.createRecord('company_c', params)
+
+    if (!response.success) {
+      console.error(response.message)
+      toast.error(response.message)
+      return null
+    }
+
+    if (response.results) {
+      const successful = response.results.filter(r => r.success)
+      const failed = response.results.filter(r => !r.success)
+      
+      if (failed.length > 0) {
+        console.error(`Failed to create ${failed.length} records:`, failed)
+        failed.forEach(record => {
+          record.errors?.forEach(error => toast.error(`${error.fieldLabel}: ${error}`))
+          if (record.message) toast.error(record.message)
+        })
+      }
+      
+      return successful.length > 0 ? successful[0].data : null
+    }
+
+    return null
+  } catch (error) {
+    console.error("Error creating company:", error?.response?.data?.message || error)
+    toast.error("Failed to create company")
+    return null
   }
-  
-  const newCompany = {
-    Id: getNextId(),
-    name: companyData.name.trim(),
-    industry: companyData.industry || '',
-    website: companyData.website || '',
-    phone: companyData.phone || '',
-    email: companyData.email || '',
-    address: companyData.address || '',
-    employees: parseInt(companyData.employees) || 0,
-    revenue: parseInt(companyData.revenue) || 0,
-    notes: companyData.notes || '',
-    createdAt: new Date().toISOString()
-  }
-  
-  companies.push(newCompany)
-  return { ...newCompany }
 }
 
-// Update existing company
 export const update = async (id, companyData) => {
-  await delay()
-  
-  const index = companies.findIndex(c => c.Id === parseInt(id))
-  if (index === -1) {
-    throw new Error(`Company with ID ${id} not found`)
+  try {
+    const apperClient = getApperClient()
+    if (!apperClient) {
+      throw new Error("ApperClient not initialized")
+    }
+
+    // Filter out empty fields and map to database field names
+    const recordData = { Id: parseInt(id) }
+    if (companyData.name?.trim()) recordData.Name = companyData.name.trim()
+    if (companyData.industry?.trim()) recordData.industry_c = companyData.industry.trim()
+    if (companyData.website?.trim()) recordData.website_c = companyData.website.trim()
+    if (companyData.phone?.trim()) recordData.phone_c = companyData.phone.trim()
+    if (companyData.email?.trim()) recordData.email_c = companyData.email.trim()
+    if (companyData.address?.trim()) recordData.address_c = companyData.address.trim()
+    if (companyData.employees !== undefined && companyData.employees !== '') recordData.employees_c = parseInt(companyData.employees) || 0
+    if (companyData.revenue !== undefined && companyData.revenue !== '') recordData.revenue_c = parseFloat(companyData.revenue) || 0
+    if (companyData.notes?.trim()) recordData.notes_c = companyData.notes.trim()
+
+    const params = {
+      records: [recordData]
+    }
+
+    const response = await apperClient.updateRecord('company_c', params)
+
+    if (!response.success) {
+      console.error(response.message)
+      toast.error(response.message)
+      return null
+    }
+
+    if (response.results) {
+      const successful = response.results.filter(r => r.success)
+      const failed = response.results.filter(r => !r.success)
+      
+      if (failed.length > 0) {
+        console.error(`Failed to update ${failed.length} records:`, failed)
+        failed.forEach(record => {
+          record.errors?.forEach(error => toast.error(`${error.fieldLabel}: ${error}`))
+          if (record.message) toast.error(record.message)
+        })
+      }
+      
+      return successful.length > 0 ? successful[0].data : null
+    }
+
+    return null
+  } catch (error) {
+    console.error("Error updating company:", error?.response?.data?.message || error)
+    toast.error("Failed to update company")
+    return null
   }
-  
-  // Validate required fields
-  if (!companyData.name?.trim()) {
-    throw new Error('Company name is required')
-  }
-  
-  const updatedCompany = {
-    ...companies[index],
-    name: companyData.name.trim(),
-    industry: companyData.industry || '',
-    website: companyData.website || '',
-    phone: companyData.phone || '',
-    email: companyData.email || '',
-    address: companyData.address || '',
-    employees: parseInt(companyData.employees) || 0,
-    revenue: parseInt(companyData.revenue) || 0,
-    notes: companyData.notes || ''
-  }
-  
-  companies[index] = updatedCompany
-  return { ...updatedCompany }
 }
 
-// Delete company
 export const deleteCompany = async (id) => {
-  await delay()
-  
-  const index = companies.findIndex(c => c.Id === parseInt(id))
-  if (index === -1) {
-    throw new Error(`Company with ID ${id} not found`)
+  try {
+    const apperClient = getApperClient()
+    if (!apperClient) {
+      throw new Error("ApperClient not initialized")
+    }
+
+    const params = {
+      RecordIds: [parseInt(id)]
+    }
+
+    const response = await apperClient.deleteRecord('company_c', params)
+
+    if (!response.success) {
+      console.error(response.message)
+      toast.error(response.message)
+      return { success: false }
+    }
+
+    if (response.results) {
+      const successful = response.results.filter(r => r.success)
+      const failed = response.results.filter(r => !r.success)
+      
+      if (failed.length > 0) {
+        console.error(`Failed to delete ${failed.length} records:`, failed)
+        failed.forEach(record => {
+          if (record.message) toast.error(record.message)
+        })
+      }
+      
+      return { success: successful.length === 1 }
+    }
+
+    return { success: false }
+  } catch (error) {
+    console.error("Error deleting company:", error?.response?.data?.message || error)
+    toast.error("Failed to delete company")
+    return { success: false }
   }
-  
-  companies.splice(index, 1)
-  return { success: true }
 }
 
 export const companyService = {
