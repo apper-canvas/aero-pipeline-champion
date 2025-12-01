@@ -1,4 +1,5 @@
 {
+  "/":{
   "/": {
     "allow": {
       "when": {
@@ -68,14 +69,26 @@
   "/sales-orders": {
     "allow": {
       "when": {
-        "conditions": [
-          {
-            "label": "User must be logged in to view sales orders",
-            "rule": "authenticated"
-          }
-        ]
+},
+  "/quotes":{
+    "allow":{
+      "when":{
+        "conditions":[{"label":"User must be logged in to view quotes","rule":"authenticated"}]
       },
-      "redirectOnDeny": "/login"
+      "redirectOnDeny":"/login",
+      "excludeRedirectQuery":false
+    }
+  },
+  "/leads":{
+    "allow":{
+      "when":{
+        "conditions":[{"label":"User must be logged in to view leads","rule":"authenticated"}]
+      },
+      "redirectOnDeny":"/login",
+      "excludeRedirectQuery":false
+    }
+  }
+}
     }
   },
   "/tasks": {

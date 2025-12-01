@@ -1,7 +1,7 @@
-import { Outlet, Link, useLocation } from 'react-router-dom'
-import React, { useState } from 'react'
-import Header from '@/components/organisms/Header'
-import ApperIcon from '@/components/ApperIcon'
+import { Link, Outlet, useLocation } from "react-router-dom";
+import React, { useState } from "react";
+import ApperIcon from "@/components/ApperIcon";
+import Header from "@/components/organisms/Header";
 
 const navigation = [
   { name: "Pipeline", href: "/pipeline", icon: "BarChart3" },
@@ -29,16 +29,11 @@ return (
       {/* Sidebar */}
       <div className={`fixed inset-y-0 left-0 z-50 w-64 bg-white shadow-lg transform transition-transform duration-300 ease-in-out md:relative md:transform-none md:shadow-none md:z-0 ${
         sidebarOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'
-      }`}>
+}`}>
         <div className="flex flex-col h-full">
-          <div className="flex items-center justify-between p-4 border-b">
-            <h2 className="text-lg font-semibold text-navy-500">Menu</h2>
-            <button
-              onClick={() => setSidebarOpen(false)}
-              className="md:hidden p-2 rounded-lg text-gray-500 hover:bg-gray-100"
-            >
-              <ApperIcon name="X" className="w-5 h-5" />
-            </button>
+          {/* Logo */}
+          <div className="p-6 border-b border-gray-200">
+            <ApperIcon name="Building2" className="w-8 h-8 text-coral-500" />
           </div>
           <nav className="flex-1 p-4 space-y-2 overflow-y-auto">
             {navigation.map((item) => {
