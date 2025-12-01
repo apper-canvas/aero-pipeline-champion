@@ -57,12 +57,14 @@ const ContactTable = ({ contacts, deals, onEditContact, onViewContact, onAddDeal
     }
   })
 
-  const formatCurrency = (amount) => {
+const formatCurrency = (amount) => {
+    // Handle null, undefined, or non-numeric values
+    const numericAmount = Number(amount) || 0
     return new Intl.NumberFormat('en-US', {
       style: 'currency',
       currency: 'USD',
       minimumFractionDigits: 0
-    }).format(amount)
+    }).format(numericAmount)
   }
 
   const SortIcon = ({ field }) => {
@@ -160,9 +162,9 @@ const ContactTable = ({ contacts, deals, onEditContact, onViewContact, onAddDeal
                       {contactDeals.length} {contactDeals.length === 1 ? 'deal' : 'deals'}
                     </Badge>
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
+<td className="px-6 py-4 whitespace-nowrap">
                     <div className="text-sm font-medium text-navy-500">
-                      {formatCurrency(totalValue)}
+                      {formatCurrency(totalValue || 0)}
                     </div>
                   </td>
 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
