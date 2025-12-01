@@ -131,9 +131,9 @@ const AddDealModal = ({ isOpen, onClose, preselectedContact, onSuccess }) => {
             placeholder="Select a contact"
             required
             error={errors.contactId}
-            options={contacts.map(contact => ({
+options={contacts.map(contact => ({
               value: contact.Id.toString(),
-              label: `${contact.name} - ${contact.company}`
+              label: `${contact.Name}${contact.company_c ? ` - ${contact.company_c}` : ''}`
             }))}
           />
 
