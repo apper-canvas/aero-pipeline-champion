@@ -141,8 +141,8 @@ const ContactTable = ({ contacts, deals, onEditContact, onViewContact, onAddDeal
                   <td className="px-6 py-4 whitespace-nowrap">
                     <div className="flex items-center">
                       <div className="w-10 h-10 bg-gradient-to-br from-coral-100 to-red-100 rounded-full flex items-center justify-center">
-                        <span className="text-coral-600 font-medium text-sm">
-                          {contact.name.charAt(0).toUpperCase()}
+<span className="text-coral-600 font-medium text-sm">
+                          {(contact.name?.charAt(0) || '?').toUpperCase()}
                         </span>
                       </div>
                       <div className="ml-4">
