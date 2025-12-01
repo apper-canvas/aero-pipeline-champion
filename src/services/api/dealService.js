@@ -327,15 +327,29 @@ async getByStage(stage) {
         'qualified': 'qualified',
         'proposal': 'proposal', 
         'won': 'won',
-        'lost': 'lost'
+        'lost': 'lost',
+        // Handle common variations and edge cases
+        'new': 'lead',
+        'prospect': 'lead',
+        'unknown': 'lead',  // Default unknown values to lead stage
+        'initial': 'lead',
+        'negotiation': 'proposal',
+        'negotiating': 'proposal',
+        'closed': 'won',
+        'closed-won': 'won',
+        'closed-lost': 'lost',
+        'cancelled': 'lost',
+        'rejected': 'lost'
       };
       
-      const mappedStage = stageMapping[stage] || stage?.toLowerCase();
+      const mappedStage = stageMapping[stage] || stageMapping[stage?.toLowerCase()] || stage?.toLowerCase();
       
       if (!validStages.includes(mappedStage)) {
-        console.error(`Invalid stage value: ${stage}. Valid values are: ${validStages.join(', ')}`);
-        toast.error(`Invalid stage value. Please use one of: ${validStages.join(', ')}`);
-        return null;
+        console.warn(`Invalid stage value: ${stage}. Defaulting to 'lead' stage. Valid values are: ${validStages.join(', ')}`);
+        // Instead of failing completely, default to 'lead' stage for better user experience
+        const defaultStage = 'lead';
+        toast.warn(`Stage "${stage}" not recognized. Set to "${defaultStage}" instead.`);
+        return defaultStage;
       }
       
       const recordData = { 
