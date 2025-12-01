@@ -8,7 +8,18 @@ import Loading from "@/components/ui/Loading";
 import Button from "@/components/atoms/Button";
 import Badge from "@/components/atoms/Badge";
 const ContactDetailModal = ({ isOpen, onClose, contact, onAddDeal }) => {
-const [deals, setDeals] = useState([])
+  // Safe date formatting utility
+  const safeDateFormat = (dateValue, fallback = 'Unknown') => {
+    if (!dateValue) return fallback
+    try {
+      const date = new Date(dateValue)
+      return isNaN(date.getTime()) ? fallback : formatDistanceToNow(date, { addSuffix: true })
+    } catch {
+      return fallback
+    }
+  }
+
+  const [deals, setDeals] = useState([])
   const [activities, setActivities] = useState([])
   const [loading, setLoading] = useState(false)
   const [activeTab, setActiveTab] = useState("info")
@@ -158,9 +169,7 @@ const loadContactData = async () => {
                     <div>
                         <h3 className="text-sm font-medium text-gray-500 mb-2">Added</h3>
                         <p className="text-sm text-gray-700">
-                            {formatDistanceToNow(new Date(contact.createdAt), {
-                                addSuffix: true
-                            })}
+{safeDateFormat(contact.createdAt, 'Recently')}
                         </p>
                     </div>
                 </div>
@@ -223,9 +232,7 @@ const loadContactData = async () => {
                             <span className="font-medium text-navy-500">
                                 {formatCurrency(deal.value)}
                             </span>
-                            <span>Updated {formatDistanceToNow(new Date(deal.lastContact), {
-                                    addSuffix: true
-                                })}
+<span>Updated {safeDateFormat(deal.lastContact, 'recently')}
                             </span>
                         </div>
                     </div>)}
@@ -324,9 +331,7 @@ const loadContactData = async () => {
                                         <p className="text-xs text-gray-500 capitalize">{activity.type}</p>
                                     </div>
                                     <span className="text-xs text-gray-500">
-                                        {formatDistanceToNow(new Date(activity.createdAt), {
-                                            addSuffix: true
-                                        })}
+{safeDateFormat(activity.createdAt, 'recently')}
                                     </span>
                                 </div>
                                 {activity.description && <p className="text-sm text-gray-700 leading-relaxed">{activity.description}</p>}
