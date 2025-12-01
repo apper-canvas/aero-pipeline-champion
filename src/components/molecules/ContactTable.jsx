@@ -144,18 +144,18 @@ const formatCurrency = (amount) => {
                     <div className="flex items-center">
                       <div className="w-10 h-10 bg-gradient-to-br from-coral-100 to-red-100 rounded-full flex items-center justify-center">
 <span className="text-coral-600 font-medium text-sm">
-                          {(contact.name?.charAt(0) || '?').toUpperCase()}
+                          {(contact.Name?.charAt(0) || '?').toUpperCase()}
                         </span>
                       </div>
                       <div className="ml-4">
-                        <div className="text-sm font-medium text-navy-500">{contact.name}</div>
-                        <div className="text-sm text-gray-500">{contact.email}</div>
+                        <div className="text-sm font-medium text-navy-500">{contact.Name}</div>
+                        <div className="text-sm text-gray-500">{contact.email_c}</div>
                       </div>
                     </div>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
-                    <div className="text-sm text-navy-500">{contact.company}</div>
-                    <div className="text-sm text-gray-500">{contact.phone}</div>
+                    <div className="text-sm text-navy-500">{contact.company_c}</div>
+                    <div className="text-sm text-gray-500">{contact.phone_c}</div>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
                     <Badge variant={contactDeals.length > 0 ? "primary" : "default"}>

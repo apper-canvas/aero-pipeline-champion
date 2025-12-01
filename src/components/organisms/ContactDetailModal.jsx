@@ -112,8 +112,8 @@ const loadContactData = async () => {
                     </span>
                 </div>
                 <div>
-                    <h2 className="text-xl font-semibold text-navy-500">{contact.name}</h2>
-<p className="text-gray-600">{contact.company || 'No Company'}</p>
+<h2 className="text-xl font-semibold text-navy-500">{contact.Name}</h2>
+                    <p className="text-gray-600">{contact.company_c || 'No Company'}</p>
                 </div>
             </div>
             <button
@@ -156,7 +156,7 @@ const loadContactData = async () => {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
                         <h3 className="text-sm font-medium text-gray-500 mb-2">Email</h3>
-                        <p className="text-sm text-gray-700">{contact.email}</p>
+<p className="text-sm text-gray-700">{contact.email_c}</p>
                     </div>
                     <div>
                         <h3 className="text-sm font-medium text-gray-500 mb-2">Phone</h3>
@@ -164,7 +164,7 @@ const loadContactData = async () => {
                     </div>
                     <div>
                         <h3 className="text-sm font-medium text-gray-500 mb-2">Company</h3>
-                        <p className="text-sm text-gray-700">{contact.company}</p>
+<p className="text-sm text-gray-700">{contact.company_c}</p>
                     </div>
                     <div>
                         <h3 className="text-sm font-medium text-gray-500 mb-2">Added</h3>

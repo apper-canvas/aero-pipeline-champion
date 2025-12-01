@@ -55,10 +55,10 @@ const Contacts = () => {
     if (!searchQuery.trim()) {
       setFilteredContacts(contacts)
     } else {
-      const filtered = contacts.filter(contact =>
-        contact.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        contact.company.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        contact.email.toLowerCase().includes(searchQuery.toLowerCase())
+const filtered = contacts.filter(contact =>
+        contact.Name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        contact.company_c.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        contact.email_c.toLowerCase().includes(searchQuery.toLowerCase())
       )
       setFilteredContacts(filtered)
     }
