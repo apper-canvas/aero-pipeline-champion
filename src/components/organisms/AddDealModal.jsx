@@ -166,8 +166,8 @@ const AddDealModal = ({ isOpen, onClose, preselectedContact, onSuccess }) => {
             required
             error={errors.stage}
 options={stages.map(stage => ({
-              value: stage.name?.toLowerCase() || '',
-              label: stage.name || 'Unnamed Stage'
+              value: stage.Name?.toLowerCase() || '',
+              label: stage.Name || 'Unnamed Stage'
             }))}
           />
 
