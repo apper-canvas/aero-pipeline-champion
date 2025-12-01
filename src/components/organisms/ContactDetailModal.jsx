@@ -97,12 +97,12 @@ const loadContactData = async () => {
                 <div
                     className="w-16 h-16 bg-gradient-to-br from-coral-100 to-red-100 rounded-full flex items-center justify-center">
                     <span className="text-coral-600 font-semibold text-xl">
-                        {contact.name.charAt(0).toUpperCase()}
+{contact.name?.charAt(0)?.toUpperCase() || '?'}
                     </span>
                 </div>
                 <div>
                     <h2 className="text-xl font-semibold text-navy-500">{contact.name}</h2>
-                    <p className="text-gray-600">{contact.company}</p>
+<p className="text-gray-600">{contact.company || 'No Company'}</p>
                 </div>
             </div>
             <button
@@ -165,7 +165,7 @@ const loadContactData = async () => {
                     </div>
                 </div>
                 {/* Tags */}
-                {contact.tags && contact.tags.length > 0 && <div>
+{contact.tags?.length > 0 && <div>
                     <h3 className="text-sm font-medium text-gray-500 mb-2">Tags</h3>
                     <div className="flex flex-wrap gap-2">
                         {contact.tags.map((tag, index) => <Badge key={index} variant="primary">
