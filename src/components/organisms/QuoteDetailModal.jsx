@@ -3,6 +3,16 @@ import Button from '@/components/atoms/Button'
 import Badge from '@/components/atoms/Badge'
 import { formatDistanceToNow } from 'date-fns'
 
+// Safe date formatting utility
+const safeDateFormat = (dateValue, fallback = 'Unknown') => {
+  if (!dateValue) return fallback
+  try {
+    const date = new Date(dateValue)
+    return isNaN(date.getTime()) ? fallback : formatDistanceToNow(date, { addSuffix: true })
+  } catch {
+    return fallback
+  }
+}
 function QuoteDetailModal({ isOpen, onClose, quote, onEdit }) {
   function formatCurrency(amount) {
     return new Intl.NumberFormat('en-US', {
@@ -66,18 +76,27 @@ function QuoteDetailModal({ isOpen, onClose, quote, onEdit }) {
                 <div>
                   <h3 className="text-sm font-medium text-gray-500 mb-1">Valid Until</h3>
                   <p className="text-base text-gray-900">
-                    {new Date(quote.validUntil).toLocaleDateString('en-US', {
-                      year: 'numeric',
-                      month: 'long',
-                      day: 'numeric'
-                    })}
+{(() => {
+                      if (!quote.validUntil) return 'Not set';
+                      try {
+                        const date = new Date(quote.validUntil);
+                        if (isNaN(date.getTime())) return 'Invalid date';
+                        return date.toLocaleDateString('en-US', {
+                          year: 'numeric',
+                          month: 'long',
+                          day: 'numeric'
+                        });
+                      } catch {
+                        return 'Invalid date';
+                      }
+                    })()}
                   </p>
                 </div>
                 
                 <div>
-                  <h3 className="text-sm font-medium text-gray-500 mb-1">Created</h3>
+<h3 className="text-sm font-medium text-gray-500 mb-1">Created</h3>
                   <p className="text-base text-gray-900">
-                    {formatDistanceToNow(new Date(quote.createdAt), { addSuffix: true })}
+                    {safeDateFormat(quote.createdAt)}
                   </p>
                 </div>
               </div>

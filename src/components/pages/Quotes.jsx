@@ -12,6 +12,16 @@ import Empty from '@/components/ui/Empty'
 import { toast } from 'react-toastify'
 import { formatDistanceToNow } from 'date-fns'
 
+// Safe date formatting utility
+const safeDateFormat = (dateValue, fallback = 'Unknown') => {
+  if (!dateValue) return fallback
+  try {
+    const date = new Date(dateValue)
+    return isNaN(date.getTime()) ? fallback : formatDistanceToNow(date, { addSuffix: true })
+  } catch {
+    return fallback
+  }
+}
 function Quotes() {
   const [quotes, setQuotes] = useState([])
   const [filteredQuotes, setFilteredQuotes] = useState([])
@@ -287,9 +297,9 @@ function Quotes() {
                         {new Date(quote.validUntil).toLocaleDateString()}
                       </div>
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
+<td className="px-6 py-4 whitespace-nowrap">
                       <div className="text-sm text-gray-500">
-                        {formatDistanceToNow(new Date(quote.createdAt), { addSuffix: true })}
+                        {safeDateFormat(quote.createdAt)}
                       </div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
